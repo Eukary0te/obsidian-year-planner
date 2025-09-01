@@ -1,0 +1,10 @@
+{
+  "id": "obsidian-year-planner",
+  "name": "Year Planner",
+  "version": "1.0.0",
+  "minAppVersion": "0.15.0",
+  "description": "Visual year calendar with color-coded groups and notes",
+  "author": "Eukary0te",
+  "authorUrl": "https://github.com/Eukary0te",
+  "isDesktopOnly": false
+}

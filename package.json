@@ -1,0 +1,14 @@
+{
+  "name": "obsidian-year-planner",
+  "version": "1.0.0",
+  "description": "Visual year calendar plugin for Obsidian",
+  "main": "dist/main.js",
+"scripts": {
+  "dev": "esbuild src/main.ts --bundle --outfile=main.js --format=cjs --platform=node --external:obsidian --watch",
+  "build": "esbuild src/main.ts --bundle --outfile=main.js --format=cjs --platform=node --external:obsidian --minify"
+},
+  "devDependencies": {
+    "esbuild": "^0.20.2",
+    "typescript": "^5.4.5"
+  }
+}
