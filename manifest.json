@@ -1,7 +1,7 @@
 {
   "id": "year-planner",
   "name": "Year Planner",
-  "version": "v1.0.1",
+  "version": "1.0.2",
   "minAppVersion": "0.15.0",
   "description": "Visual year calendar with color-coded groups and notes",
   "author": "Eukary0te",
