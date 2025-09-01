@@ -1,5 +1,5 @@
 {
-  "name": "obsidian-year-planner",
+  "name": "year-planner",
   "version": "1.0.1",
   "description": "Visual year calendar plugin for Obsidian",
   "main": "dist/main.js",
