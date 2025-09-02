@@ -103,11 +103,11 @@ export default class YearPlannerPlugin extends Plugin {
     this.registerView(VIEW_TYPE, (leaf)=>new YearPlannerView(this, leaf));
 
     this.addCommand({ id:"open-year-planner", name:"Open Year Planner", callback:()=>this.activateView() });
-    this.addCommand({ id:"toggle-brush", name:"Year Planner: Toggle Brush", callback:()=>this.withView(v=>v.toggleBrush()) });
-    this.addCommand({ id:"year-prev", name:"Year Planner: Previous Year", callback:()=>this.withView(v=>v.setYear(v.year-1)) });
-    this.addCommand({ id:"year-next", name:"Year Planner: Next Year", callback:()=>this.withView(v=>v.setYear(v.year+1)) });
-    this.addCommand({ id:"year-goto", name:"Year Planner: Go to Year…", callback:()=>this.withView(v=>v.promptGotoYear()) });
-    this.addCommand({ id:"edit-note-modal", name:"Year Planner: Edit note…", callback:()=>this.withView(v=>v.openEditNoteModal()) });
+    this.addCommand({ id:"toggle-brush", name:"Toggle Brush", callback:()=>this.withView(v=>v.toggleBrush()) });
+    this.addCommand({ id:"year-prev", name:"Previous Year", callback:()=>this.withView(v=>v.setYear(v.year-1)) });
+    this.addCommand({ id:"year-next", name:"Next Year", callback:()=>this.withView(v=>v.setYear(v.year+1)) });
+    this.addCommand({ id:"year-goto", name:"Go to Year…", callback:()=>this.withView(v=>v.promptGotoYear()) });
+    this.addCommand({ id:"edit-note-modal", name:"Edit note…", callback:()=>this.withView(v=>v.openEditNoteModal()) });
     // кнопку/команду Clear day специально НЕ регистрируем
 
     this.addRibbonIcon("calendar","Open Year Planner",()=>this.activateView());
