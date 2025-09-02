@@ -113,7 +113,10 @@ export default class YearPlannerPlugin extends Plugin {
     this.addRibbonIcon("calendar","Open Year Planner",()=>this.activateView());
   }
 
-  onunload(){ this.app.workspace.detachLeavesOfType(VIEW_TYPE); }
+  onunload() {
+  // никакого detach; можно при необходимости сохранить настройки
+  // await this.saveData(this.settings) — если нужно
+}
 
   private withView(fn:(v:YearPlannerView)=>void){
     const leaves = this.app.workspace.getLeavesOfType(VIEW_TYPE);
