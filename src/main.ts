@@ -412,8 +412,9 @@ ${json}
       const chip = wrap.createDiv({ cls:"yp-chip" });
 
       const sw = chip.createDiv({ cls:"yp-swatch" }) as HTMLElement;
-      sw.style.background = it.color;
-      if (this.brushColor===it.color) sw.addClass("is-active");
+      sw.addClass("yp-swatch");
+      sw.style.setProperty("--chip-color", it.color);
+      if (this.brushColor === it.color) sw.addClass("is-active");
 
       const legend = chip.createSpan({ cls:"yp-legend", text: it.label ?? "" });
       // legend не кликабелен, только отображение
@@ -582,10 +583,10 @@ ${json}
 
       const pill = document.createElement("div");
       pill.className = "run-pill";
-      pill.style.left = `${left}px`;
-      pill.style.width = `${width}px`;
-      pill.style.background = row[start].color!;
-      pill.style.color = pickTextColor(row[start].color!);
+      pill.style.setProperty("--pill-left", `${left}px`);
+      pill.style.setProperty("--pill-width", `${width}px`);
+      pill.style.setProperty("--pill-bg", row[start].color!);
+      pill.style.setProperty("--pill-fg", pickTextColor(row[start].color!));
       pill.textContent = label || "";
 
       for (let k=start;k<j;k++) row[k].el.classList.add("hide-number");
@@ -718,7 +719,7 @@ ${json}
         const r2 = contentEl.createDiv({ cls:"mt-2" });
         r2.createEl("label", { text:"Note:" });
         this.textarea = r2.createEl("textarea");
-        this.textarea.style.width="100%"; this.textarea.style.height="96px";
+        this.textarea.addClass("yp-note-textarea");
         this.textarea.value = currentNote;
 
         const act = contentEl.createDiv({ cls:"modal-button-container" });
@@ -773,7 +774,8 @@ ${json}
         items.forEach(it=>{
           const wrap = this.colorWrap.createDiv({ cls:"chip-wrap" });
           const chip = wrap.createDiv({ cls:"chip" });
-          (chip as HTMLElement).style.background = it.color;
+          (chip as HTMLElement).style.setProperty("--chip-bg", it.color);
+          (chip as HTMLElement).addClass("yp-group-chip");
           if (this.selectedColor===it.color) chip.addClass("active");
           chip.onclick = ()=>{ this.selectedColor = it.color; this.renderChips(); };
           wrap.createSpan({ cls:"chip-label", text: it.label ?? "" });
@@ -797,7 +799,9 @@ ${json}
   }
   private paintCellFromData(el:HTMLElement, iso:string, inMonth:boolean){
     if (!inMonth){
-      el.classList.remove("has-color"); el.style.color="";
+      el.classList.remove("has-color");
+      el.style.removeProperty("--day-bg");
+      el.style.removeProperty("--day-fg");
       el.querySelector(".note-dot")?.remove();
       el.querySelector(".note-inline")?.remove();
       return;
@@ -806,12 +810,15 @@ ${json}
     const color = d?.color; const note = d?.note;
 
     if (color){
-      el.style.background = color; el.style.borderColor="transparent";
-      el.classList.add("has-color"); el.style.color = pickTextColor(color);
+      el.style.setProperty("--day-bg", color);
+      el.style.setProperty("--day-fg", pickTextColor(color));
+      el.classList.add("has-color");
+      el.classList.add("has-color");
     } else {
       el.style.background="var(--background-primary)";
-      el.style.borderColor="var(--background-modifier-border)";
-      el.classList.remove("has-color"); el.style.color="";
+      el.classList.remove("has-color");
+      el.style.removeProperty("--day-bg");
+      el.style.removeProperty("--day-fg");
     }
     if (note && note.trim()!==""){
       if (!el.querySelector(".note-dot")){
@@ -821,7 +828,9 @@ ${json}
         const tip = document.createElement("div"); tip.className="yp-tooltip"; tip.innerText=note.trim();
         document.body.appendChild(tip);
         const r = el.getBoundingClientRect();
-        tip.style.position="fixed"; tip.style.left=r.left+"px"; tip.style.top=(r.bottom+4)+"px"; tip.style.zIndex="9999";
+        tip.addClass("yp-tip");
+        tip.style.setProperty("--tip-left", `${r.left}px`);
+        tip.style.setProperty("--tip-top", `${r.bottom + 4}px`);
         el.onmouseleave = ()=>tip.remove();
       };
     } else {
